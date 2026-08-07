@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06 게시글 작성 | 판다마켓</title>
+    <link rel="icon" href="../images/logo.png" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/06_board.css" />
+  </head>
+  <body>
+    <header class="gnb">
+      <div class="gnb__inner">
+        <div class="gnb__left">
+          <a href="../01_landing/" class="logo">
+            <img src="../images/logo.png" alt="" class="logo__img" />
+            <span class="logo__text">판다마켓</span>
+          </a>
+          <nav class="gnb__nav">
+            <a href="../06_board/" class="is-active">자유게시판</a>
+            <a href="../04_items/">중고마켓</a>
+          </nav>
+        </div>
+        <a href="../02_login/" class="btn-login">로그인</a>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page__inner">
+        <h1 class="board-form__title">게시글 쓰기</h1>
+        <form class="board-form" action="../06_board-detail/" method="get">
+          <div>
+            <label class="board-form__label" for="title">*제목</label>
+            <input
+              class="board-form__input"
+              id="title"
+              name="title"
+              type="text"
+              placeholder="제목을 입력해주세요"
+            />
+          </div>
+          <div>
+            <label class="board-form__label" for="content">*내용</label>
+            <textarea
+              class="board-form__textarea"
+              id="content"
+              name="content"
+              placeholder="내용을 입력해주세요"
+            ></textarea>
+          </div>
+          <div class="board-form__actions">
+            <button class="board-form__submit" type="submit">등록</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <p class="footer__copyright">@codeit - 2024</p>
+        <div class="footer__links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../faq/">FAQ</a>
+        </div>
+        <div class="footer__sns">
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_facebook.png" alt="facebook" />
+          </a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_twitter.png" alt="twitter" />
+          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_youtube.png" alt="youtube" />
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_instagram.png" alt="instagram" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

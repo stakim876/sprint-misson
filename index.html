@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>판다마켓 | 학습용 목차</title>
+    <link rel="icon" href="./images/logo.png" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(180deg, #e6f2ff 0%, #ffffff 50%);
+      }
+      .hub {
+        width: 100%;
+        max-width: 64rem;
+        padding: 4rem;
+        border-radius: 2rem;
+        background: #fff;
+        box-shadow: 0 1.2rem 4rem rgba(54, 146, 255, 0.12);
+      }
+      h1 {
+        margin-bottom: 0.8rem;
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: #3692ff;
+      }
+      p {
+        margin-bottom: 2.4rem;
+        font-size: 1.6rem;
+        color: #6b7280;
+      }
+      ol {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        list-style: none;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1.6rem 2rem;
+        border-radius: 1.2rem;
+        background: #f3f4f6;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #1f2937;
+        transition: background 0.15s ease;
+      }
+      a:hover {
+        background: #e6f2ff;
+        color: #3692ff;
+      }
+      .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 999px;
+        background: #3692ff;
+        color: #fff;
+        font-size: 1.4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="hub">
+      <h1>판다마켓 피그마 1~6</h1>
+      <p>만든 순서대로 번호 붙여 두었습니다. 다시 만들어볼 때 이 순서대로 보시면 됩니다.</p>
+      <ol>
+        <li>
+          <a href="./01_landing/">
+            <span class="num">1</span>
+            랜딩 페이지
+          </a>
+        </li>
+        <li>
+          <a href="./02_login/">
+            <span class="num">2</span>
+            로그인 / 회원가입
+          </a>
+        </li>
+        <li>
+          <a href="./03_additem/">
+            <span class="num">3</span>
+            상품 등록하기
+          </a>
+        </li>
+        <li>
+          <a href="./04_items/">
+            <span class="num">4</span>
+            중고마켓
+          </a>
+        </li>
+        <li>
+          <a href="./05_item-detail/">
+            <span class="num">5</span>
+            상품 상세
+          </a>
+        </li>
+        <li>
+          <a href="./06_board/">
+            <span class="num">6</span>
+            자유게시판
+          </a>
+        </li>
+      </ol>
+    </main>
+  </body>
+</html>
