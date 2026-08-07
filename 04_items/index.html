@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04 중고마켓 | 판다마켓</title>
+    <link rel="icon" href="../images/logo.png" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/04_items.css" />
+  </head>
+  <body>
+    <header class="gnb">
+      <div class="gnb__inner">
+        <div class="gnb__left">
+          <a href="../01_landing/" class="logo">
+            <img src="../images/logo.png" alt="" class="logo__img" />
+            <span class="logo__text">판다마켓</span>
+          </a>
+          <nav class="gnb__nav">
+            <a href="../06_board/">자유게시판</a>
+            <a href="../04_items/" class="is-active">중고마켓</a>
+          </nav>
+        </div>
+        <a href="../02_login/" class="btn-login">로그인</a>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page__inner">
+        <section class="items__section">
+          <div class="items__section-head">
+            <h2 class="items__section-title">베스트 상품</h2>
+          </div>
+          <div class="items__grid items__grid--best" id="bestGrid"></div>
+        </section>
+
+        <section class="items__section">
+          <div class="items__section-head">
+            <h2 class="items__section-title">판매 중인 상품</h2>
+            <div class="items__tools">
+              <label class="items__search">
+                <span class="items__search-icon">🔍</span>
+                <input type="search" placeholder="검색할 상품을 입력해주세요" />
+              </label>
+              <a class="btn-register" href="../03_additem/">상품 등록하기</a>
+              <select class="items__sort" aria-label="정렬">
+                <option>최신순</option>
+                <option>좋아요순</option>
+              </select>
+            </div>
+          </div>
+          <div class="items__grid items__grid--all" id="allGrid"></div>
+          <div class="items__pager">
+            <button type="button">&lt;</button>
+            <button type="button" class="is-active">1</button>
+            <button type="button">2</button>
+            <button type="button">3</button>
+            <button type="button">4</button>
+            <button type="button">5</button>
+            <button type="button">&gt;</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <p class="footer__copyright">@codeit - 2024</p>
+        <div class="footer__links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../faq/">FAQ</a>
+        </div>
+        <div class="footer__sns">
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_facebook.png" alt="facebook" />
+          </a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_twitter.png" alt="twitter" />
+          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_youtube.png" alt="youtube" />
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_instagram.png" alt="instagram" />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/04_items.js"></script>
+  </body>
+</html>

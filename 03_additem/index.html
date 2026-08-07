@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03 상품 등록 | 판다마켓</title>
+    <link rel="icon" href="../images/logo.png" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/03_additem.css" />
+  </head>
+  <body>
+    <header class="gnb">
+      <div class="gnb__inner">
+        <div class="gnb__left">
+          <a href="../01_landing/" class="logo">
+            <img src="../images/logo.png" alt="" class="logo__img" />
+            <span class="logo__text">판다마켓</span>
+          </a>
+          <nav class="gnb__nav">
+            <a href="../06_board/">자유게시판</a>
+            <a href="../04_items/" class="is-active">중고마켓</a>
+          </nav>
+        </div>
+        <a href="../02_login/" class="btn-login">로그인</a>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page__inner">
+        <div class="additem__header">
+          <h1 class="additem__title">상품 등록하기</h1>
+          <button class="additem__submit" type="submit" form="additemForm">등록</button>
+        </div>
+
+        <form class="additem__form" id="additemForm" action="#" method="post">
+          <div>
+            <label class="additem__label" for="image">상품 이미지</label>
+            <label class="additem__upload" for="image">
+              <span class="additem__upload-icon">+</span>
+              <span>이미지 등록</span>
+            </label>
+            <input id="image" name="image" type="file" accept="image/*" hidden />
+          </div>
+
+          <div>
+            <label class="additem__label" for="name">상품명</label>
+            <input
+              class="additem__input"
+              id="name"
+              name="name"
+              type="text"
+              placeholder="상품명을 입력해주세요"
+            />
+          </div>
+
+          <div>
+            <label class="additem__label" for="description">상품 소개</label>
+            <textarea
+              class="additem__textarea"
+              id="description"
+              name="description"
+              placeholder="상품 소개를 입력해주세요"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="additem__label" for="price">판매가격</label>
+            <input
+              class="additem__input"
+              id="price"
+              name="price"
+              type="text"
+              placeholder="판매 가격을 입력해주세요"
+            />
+          </div>
+
+          <div>
+            <label class="additem__label" for="tag">태그</label>
+            <input
+              class="additem__input"
+              id="tag"
+              name="tag"
+              type="text"
+              placeholder="태그를 입력해주세요"
+            />
+            <div class="additem__tags">
+              <span class="additem__tag">#태그 <button type="button">×</button></span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <p class="footer__copyright">@codeit - 2024</p>
+        <div class="footer__links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../faq/">FAQ</a>
+        </div>
+        <div class="footer__sns">
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_facebook.png" alt="facebook" />
+          </a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_twitter.png" alt="twitter" />
+          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_youtube.png" alt="youtube" />
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_instagram.png" alt="instagram" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
