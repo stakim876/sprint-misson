@@ -159,6 +159,17 @@ body {
   text-decoration: underline;
 }
 
+.field__error {
+  margin-top: -0.8rem;
+  font-size: 1.4rem;
+  color: #f74747;
+}
+
+.field__input.is-invalid,
+.field__control:has(.is-invalid) {
+  border-color: #f74747;
+}
+
 @media (max-width: 768px) {
   .auth__logo-img {
     width: 8rem;

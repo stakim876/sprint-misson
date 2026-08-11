@@ -1,36 +1,126 @@
-const products = [
-  { name: "아이폰 14 Pro", price: 980000, favoriteCount: 24, color: "#c7d2fe" },
-  { name: "맥북 에어 M2", price: 1250000, favoriteCount: 18, color: "#bbf7d0" },
-  { name: "에어팟 프로 2", price: 220000, favoriteCount: 31, color: "#fecaca" },
-  { name: "나이키 운동화", price: 89000, favoriteCount: 12, color: "#fde68a" },
-  { name: "아이패드 에어", price: 650000, favoriteCount: 9, color: "#ddd6fe" },
-  { name: "갤럭시 워치", price: 180000, favoriteCount: 15, color: "#a5f3fc" },
-  { name: "로지텍 마우스", price: 45000, favoriteCount: 7, color: "#fbcfe8" },
-  { name: "기계식 키보드", price: 120000, favoriteCount: 21, color: "#bfdbfe" },
-  { name: "모니터 27인치", price: 310000, favoriteCount: 11, color: "#d9f99d" },
-  { name: "블루투스 스피커", price: 56000, favoriteCount: 6, color: "#fed7aa" },
-];
+const PAGE_SIZE = 5;
+let currentPage = 1;
+let keyword = "";
+let sortBy = "latest";
 
-function formatPrice(price) {
-  return price.toLocaleString("ko-KR") + "원";
-}
+const bestGrid = document.getElementById("bestGrid");
+const allGrid = document.getElementById("allGrid");
+const searchInput = document.querySelector(".items__search input");
+const sortSelect = document.querySelector(".items__sort");
+const pager = document.querySelector(".items__pager");
 
 function createCard(product) {
+  const thumbStyle = product.image
+    ? `background-image:url('${product.image}');background-size:cover;background-position:center;`
+    : `background:${product.color || "#e5e7eb"}`;
+
   return `
-    <a class="product-card" href="../05_item-detail/">
-      <div class="product-card__thumb" style="background:${product.color}"></div>
+    <a class="product-card" href="../05_item-detail/?id=${encodeURIComponent(product.id)}">
+      <div class="product-card__thumb" style="${thumbStyle}"></div>
       <div>
-        <p class="product-card__name">${product.name}</p>
-        <p class="product-card__price">${formatPrice(product.price)}</p>
-        <p class="product-card__like">♡ ${product.favoriteCount}</p>
+        <p class="product-card__name">${escapeHtml(product.name)}</p>
+        <p class="product-card__price">${Store.formatPrice(product.price)}</p>
+        <p class="product-card__like">♡ ${product.favoriteCount || 0}</p>
       </div>
     </a>
   `;
 }
 
-document.getElementById("bestGrid").innerHTML = products
-  .slice(0, 4)
-  .map(createCard)
-  .join("");
+function getFilteredProducts() {
+  let products = Store.getProducts();
 
-document.getElementById("allGrid").innerHTML = products.map(createCard).join("");
+  if (keyword) {
+    const q = keyword.toLowerCase();
+    products = products.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        (p.tags || []).some((tag) => String(tag).toLowerCase().includes(q))
+    );
+  }
+
+  products = [...products].sort((a, b) => {
+    if (sortBy === "likes") {
+      return (b.favoriteCount || 0) - (a.favoriteCount || 0);
+    }
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
+  return products;
+}
+
+function renderBest() {
+  const best = [...Store.getProducts()]
+    .sort((a, b) => (b.favoriteCount || 0) - (a.favoriteCount || 0))
+    .slice(0, 4);
+  bestGrid.innerHTML = best.map(createCard).join("");
+}
+
+function renderPager(totalPages) {
+  if (!pager) return;
+  const pages = Math.max(1, totalPages);
+  currentPage = Math.min(currentPage, pages);
+
+  let html = `<button type="button" data-page="prev" ${currentPage <= 1 ? "disabled" : ""}>&lt;</button>`;
+  for (let i = 1; i <= pages; i += 1) {
+    html += `<button type="button" data-page="${i}" class="${i === currentPage ? "is-active" : ""}">${i}</button>`;
+  }
+  html += `<button type="button" data-page="next" ${currentPage >= pages ? "disabled" : ""}>&gt;</button>`;
+  pager.innerHTML = html;
+}
+
+function renderAll() {
+  const products = getFilteredProducts();
+  const totalPages = Math.ceil(products.length / PAGE_SIZE) || 1;
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = products.slice(start, start + PAGE_SIZE);
+
+  allGrid.innerHTML =
+    pageItems.length > 0
+      ? pageItems.map(createCard).join("")
+      : `<p class="items__empty">검색 결과가 없습니다.</p>`;
+
+  renderPager(totalPages);
+}
+
+function render() {
+  renderBest();
+  renderAll();
+}
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    keyword = searchInput.value.trim();
+    currentPage = 1;
+    renderAll();
+  });
+}
+
+if (sortSelect) {
+  sortSelect.innerHTML = `
+    <option value="latest">최신순</option>
+    <option value="likes">좋아요순</option>
+  `;
+  sortSelect.addEventListener("change", () => {
+    sortBy = sortSelect.value;
+    currentPage = 1;
+    renderAll();
+  });
+}
+
+if (pager) {
+  pager.addEventListener("click", (event) => {
+    const btn = event.target.closest("button[data-page]");
+    if (!btn || btn.disabled) return;
+    const value = btn.dataset.page;
+    const products = getFilteredProducts();
+    const totalPages = Math.ceil(products.length / PAGE_SIZE) || 1;
+
+    if (value === "prev") currentPage = Math.max(1, currentPage - 1);
+    else if (value === "next") currentPage = Math.min(totalPages, currentPage + 1);
+    else currentPage = Number(value);
+
+    renderAll();
+  });
+}
+
+render();
