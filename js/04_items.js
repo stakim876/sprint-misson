@@ -59,68 +59,68 @@ function renderPager(totalPages) {
   if (!pager) return;
   const pages = Math.max(1, totalPages);
   currentPage = Math.min(currentPage, pages);
-  
+
   let html = `<button type="button" data-page="prev" ${currentPage <= 1 ? "disabled" : ""}>&lt;</button>`;
   for (let i = 1; i <= pages; i += 1) {
-     html += `<button type="button" data-page="next" ${currentPage >= pages ? "disabled" : ""}>&gt;</button>`;
+    html += `<button type="button" data-page="${i}" class="${i === currentPage ? "is-active" : ""}">${i}</button>`;
   }
   html += `<button type="button" data-page="next" ${currentPage >= pages ? "disabled" : ""}>&gt;</button>`;
   pager.innerHTML = html;
-  }  
+}
 
-  function renderAll() {
-    const products = getFilteredProducts();
-    const totalPages = Math.ceil(products.length / PAGE_SIZE) || 1;
-    const start = (currentPage -1) * PAGE_SIZE;
-    const pageItems = products.slice(start, start + PAGE_SIZE);
+function renderAll() {
+  const products = getFilteredProducts();
+  const totalPages = Math.ceil(products.length / PAGE_SIZE) || 1;
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = products.slice(start, start + PAGE_SIZE);
 
-    allGrid.innerHTML = 
-     pageItems.length > 0
-     ? pageItems.map(createCard).join("")
-     : '<p class="items_empty">검색 결과가 없습니다.</p>';
+  allGrid.innerHTML =
+    pageItems.length > 0
+      ? pageItems.map(createCard).join("")
+      : `<p class="items__empty">검색 결과가 없습니다.</p>`;
 
-     renderPager(totalPages);
-  }
+  renderPager(totalPages);
+}
 
-  function render() {
-    renderBest();
+function render() {
+  renderBest();
+  renderAll();
+}
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    keyword = searchInput.value.trim();
+    currentPage = 1;
     renderAll();
-  }
+  });
+}
 
-  if (searchInput) {
-    searchInput.addEventListener("input", () => {
-      keyword = searchInput.value.trim();
-      currentPage = 1;
-      renderAll();
-    });
-  }
-
-  if (sortSelect) {
+if (sortSelect) {
   sortSelect.innerHTML = `
     <option value="latest">최신순</option>
     <option value="likes">좋아요순</option>
   `;
-   sortSelect.addEventListener("change", () => {
-     sortBy = sortSelect.value;
-     currentPage = 1;
-     renderAll();
-   });
-  }
+  sortSelect.addEventListener("change", () => {
+    sortBy = sortSelect.value;
+    currentPage = 1;
+    renderAll();
+  });
+}
 
-  if (pager) {
-    pager.addEventListener("click", (event) =>{
-      const btn = event.target.closest("button[data-page]");
-      if (!btn || btn.disabled) return;
-      const value = btn.dataset.page;
-      const products = getFilteredProducts();
-      const totalPages = Math.ceil(products.length / PAGE_SIZE) || 1;
-      
-      if (value === "prev") currentPage = Math.max(1, currentPage -1);
-      else if (value === "next") currentPage = Math.min(totalPages, currentPage + 1);
-      else currentPage = Number(value);
+if (pager) {
+  pager.addEventListener("click", (event) => {
+    const btn = event.target.closest("button[data-page]");
+    if (!btn || btn.disabled) return;
+    const value = btn.dataset.page;
+    const products = getFilteredProducts();
+    const totalPages = Math.ceil(products.length / PAGE_SIZE) || 1;
 
-      renderAll();
-    });
-  }
+    if (value === "prev") currentPage = Math.max(1, currentPage - 1);
+    else if (value === "next") currentPage = Math.min(totalPages, currentPage + 1);
+    else currentPage = Number(value);
 
-  render();
+    renderAll();
+  });
+}
+
+render();
