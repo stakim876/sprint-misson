@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06 자유게시판 | 판다마켓</title>
+    <link rel="icon" href="../images/logo.png" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/06_board.css" />
+  </head>
+  <body>
+    <header class="gnb">
+      <div class="gnb__inner">
+        <div class="gnb__left">
+          <a href="../01_landing/" class="logo">
+            <img src="../images/logo.png" alt="" class="logo__img" />
+            <span class="logo__text">판다마켓</span>
+          </a>
+          <nav class="gnb__nav">
+            <a href="../06_board/" class="is-active">자유게시판</a>
+            <a href="../04_items/">중고마켓</a>
+          </nav>
+        </div>
+        <a href="../02_login/" class="btn-login">로그인</a>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page__inner">
+        <div class="board__header">
+          <h1 class="board__title">자유게시판</h1>
+          <div class="board__tools">
+            <label class="board__search">
+              <span>🔍</span>
+              <input type="search" placeholder="검색할 게시글을 입력해주세요" />
+            </label>
+            <a class="btn-write" href="../06_board-write/">글쓰기</a>
+          </div>
+        </div>
+
+        <h2 class="board__best-title">베스트 게시글</h2>
+        <div class="board__best-grid" id="bestPosts"></div>
+
+        <div class="board__list" id="postList"></div>
+
+        <div class="board__empty" id="emptyState" hidden>
+          <div class="board__empty-icon">📝</div>
+          <p class="board__empty-text">게시글이 아직 없어요</p>
+          <a class="btn-write" href="../06_board-write/">게시글 작성하기</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <p class="footer__copyright">@codeit - 2024</p>
+        <div class="footer__links">
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="../faq/">FAQ</a>
+        </div>
+        <div class="footer__sns">
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_facebook.png" alt="facebook" />
+          </a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_twitter.png" alt="twitter" />
+          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_youtube.png" alt="youtube" />
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="../icons/ic_instagram.png" alt="instagram" />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/06_board.js"></script>
+  </body>
+</html>
