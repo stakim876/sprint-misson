@@ -141,6 +141,10 @@ body {
   gap: 1.6rem;
 }
 
+.social__buttons a {
+  display: flex;
+}
+
 .social__buttons img {
   width: 4.2rem;
   height: 4.2rem;
