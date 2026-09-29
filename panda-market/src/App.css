@@ -1,0 +1,89 @@
+/* 헤더는 한 줄, 베스트는 4칸, 판매 상품은 5칸 그리드로 배치한다. */
+.gnb {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 70px;
+  padding: 0 200px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.gnb nav {
+  display: flex;
+  gap: 24px;
+}
+
+.gnb a {
+  color: #4b5563;
+}
+
+.gnb a.is-active {
+  color: #3692ff;
+  font-weight: 700;
+}
+
+.btn-login {
+  margin-left: auto;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+section + section {
+  margin-top: 40px;
+}
+
+h2 {
+  margin-bottom: 24px;
+  font-size: 20px;
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.grid-best {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-all {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #f3f4f6;
+}
+
+.product-card h3 {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.product-card p {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
