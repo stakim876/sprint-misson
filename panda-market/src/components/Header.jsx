@@ -1,4 +1,4 @@
-// 상단 바. 로고는 public/images/logo.png 이고, 현재 페이지인 중고마켓만 활성화한다.
+// 상단 바. 링크 주소는 App.jsx의 Route path와 같아야 화면이 나온다.
 function Header() {
   return (
     <header className="gnb">
