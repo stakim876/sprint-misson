@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// 상품 카드 하나. 클릭하면 /items/상품id 상세로 이동한다.
+// Link는 문서를 다시 받지 않고 주소만 /items/:id 로 바꾼다. 상세 페이지가 그 id로 상품을 찾는다.
 function ItemCard({ item }) {
   // 가격은 980000 을 980,000 처럼 천 단위로 끊는다.
   const price = item.price.toLocaleString("ko-KR");

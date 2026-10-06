@@ -4,12 +4,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import items from "../data/items";
 import "../App.css";
-// 주소의 id 와 같은 상품 하나를 찾아 이미지, 가격, 소개, 태그, 문의를 그린다.
+// useParams의 id는 주소의 :id 문자열이다. find 결과가 없으면 아래 early return으로 빠진다.
+// Hook은 그 return보다 먼저 호출한다. 조건문 뒤에서 호출하면 렌더마다 Hook 순서가 달라진다.
 function ItemDetailPage() {
   const { id } = useParams();
   const item = items.find((product) => product.id === id);
   const [draft, setDraft] = useState("");
-  // 문의는 상품 id 별로 나눠 둔다. 다른 상품 상세와 섞이지 않는다.
+  // 문의 객체의 키는 상품 id다. 상품이 바뀌어도 다른 키의 배열은 유지된다.
   const [commentsById, setCommentsById] = useState({});
   if (!item) {
     return (
@@ -26,7 +27,8 @@ function ItemDetailPage() {
   // 가격은 980000 을 980,000 처럼 천 단위로 끊는다.
   const price = item.price.toLocaleString("ko-KR");
   const comments = commentsById[item.id] ?? [];
-  // 빈 글은 올리지 않는다. 등록되면 입력창을 비운다.
+  // preventDefault가 없으면 form 제출이 페이지를 새로고침한다.
+  // prev로 직전 state를 읽어 해당 id 배열만 새 배열로 바꾼다. 기존 객체를 직접 수정하지 않는다.
   function handleSubmit(event) {
     event.preventDefault();
     const text = draft.trim();
@@ -67,7 +69,7 @@ function ItemDetailPage() {
             />
             <button type="submit">등록</button>
           </form>
-          {/* 문의가 없으면 안내 문구를, 있으면 이 상품의 문의만 목록으로 보여 준다. */}
+          {/* commentsById[상품id]가 없으면 ?? [] 이라 빈 목록으로 보고 안내 문구를 그린다. */}
           {comments.length === 0 ? (
             <p className="comments-empty">
               아직 문의가 없어요

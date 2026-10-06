@@ -7,29 +7,29 @@ import "../App.css";
 
 const pageSize = 5;
 
-// 중고마켓 목록. App.jsx에서 / 와 /items 주소에 연결한다.
+// keyword, sort, page만 state다. 카드 목록은 매 렌더마다 이 값으로 다시 계산하는 파생 값이다.
 function ItemsPage() {
   const [keyword, setKeyword] = useState("");
   const [sort, setSort] = useState("latest");
   const [page, setPage] = useState(1);
-  // 원본 배열은 그대로 두고, 좋아요 수가 많은 순으로 4개만 고른다.
+  // sort는 원본 배열을 바꾸므로, 복사본을 만들어 정렬한다.
   const bestItems = [...items]
     .sort((a, b) => b.favoriteCount - a.favoriteCount)
     .slice(0, 4);
-  // 검색은 이름에 글자가 포함된 상품만 남긴다. 최신순은 원래 순서, 좋아요순은 favoriteCount가 큰 순서다.
+  // filter로 이름에 검색어가 있는 상품만 남긴다. 좋아요순일 때만 favoriteCount로 다시 정렬한다.
   const sellingItems = items
     .filter((item) => item.name.includes(keyword.trim()))
     .sort((a, b) =>
       sort === "favorite" ? b.favoriteCount - a.favoriteCount : 0
     );
-  // 판매 목록은 5개씩 잘라 현재 페이지 카드만 그린다.
+  // 시작 인덱스는 (현재 페이지 - 1) * 5 다. 그 위치에서 pageSize개만 자른다.
   const pageCount = Math.max(1, Math.ceil(sellingItems.length / pageSize));
   const currentPage = Math.min(page, pageCount);
   const pagedItems = sellingItems.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
-  // 검색어나 정렬이 바뀌면 1페이지로 돌아간다.
+  // 검색·정렬 후 결과 개수가 줄면 없는 페이지를 가리킬 수 있어 1페이지로 되돌린다.
   function changeKeyword(value) {
     setKeyword(value);
     setPage(1);
