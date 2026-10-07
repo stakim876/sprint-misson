@@ -1,19 +1,33 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { addItem } from "../data/items";
 
-// value를 state에 묶은 입력은 제어 컴포넌트다. 화면에 보이는 값의 기준이 state다.
 function AddItemPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [tag, setTag] = useState("");
+  const navigate = useNavigate();
 
-  // form 바깥 등록 버튼은 form="additemForm"으로 이 form을 제출한다.
-  // preventDefault가 없으면 제출 때 페이지가 새로고침된다. 입력값은 아직 목록 state에 넣지 않는다.
   function handleSubmit(event) {
     event.preventDefault();
-    console.log({ name, description, price, tag });
+    if (!name.trim()) return;
+
+    addItem({
+      id: `p${Date.now()}`,
+      name: name.trim(),
+      price: Number(price) || 0,
+      favoriteCount: 0,
+      image: "/images/item-phone.jpg",
+      description,
+      tags: tag
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
+    });
+    navigate("/items");
   }
 
   return (

@@ -1,5 +1,5 @@
-// 서버 없이 쓰는 상품 원본. 화면에서는 이 배열을 직접 수정하지 않고 복사한 뒤 정렬한다.
-const items = [
+// 목록 화면은 매 렌더마다 이 함수로 현재 배열을 읽는다.
+  let items = [
   { 
     id: "p1", 
     name: "iPhone 14 Pro",
@@ -90,4 +90,10 @@ const items = [
    },
 ];
 
-export default items;
+export function getItems() {
+  return items;
+}
+
+export function addItem(item) {
+  items = [item, ...items];
+}

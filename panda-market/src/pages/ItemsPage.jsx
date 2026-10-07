@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import ItemCard from "../components/ItemCard";
 import Footer from "../components/Footer";
-import items from "../data/items";
+import { getItems } from "../data/items";
 import "../App.css";
 
 const pageSize = 5;
@@ -12,6 +12,7 @@ function ItemsPage() {
   const [keyword, setKeyword] = useState("");
   const [sort, setSort] = useState("latest");
   const [page, setPage] = useState(1);
+  const items = getItems();
   // sort는 원본 배열을 바꾸므로, 복사본을 만들어 정렬한다.
   const bestItems = [...items]
     .sort((a, b) => b.favoriteCount - a.favoriteCount)

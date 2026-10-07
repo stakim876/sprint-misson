@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import items from "../data/items";
+import { getItems } from "../data/items";
 import "../App.css";
 // useParams의 id는 주소의 :id 문자열이다. find 결과가 없으면 아래 early return으로 빠진다.
 // Hook은 그 return보다 먼저 호출한다. 조건문 뒤에서 호출하면 렌더마다 Hook 순서가 달라진다.
 function ItemDetailPage() {
   const { id } = useParams();
-  const item = items.find((product) => product.id === id);
+  const item = getItems().find((product) => product.id === id);
   const [draft, setDraft] = useState("");
   // 문의 객체의 키는 상품 id다. 상품이 바뀌어도 다른 키의 배열은 유지된다.
   const [commentsById, setCommentsById] = useState({});
