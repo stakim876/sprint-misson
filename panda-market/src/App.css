@@ -397,3 +397,43 @@ h2 {
   color: #fff;
   font-weight: 600;
 }
+
+@media (max-width: 1200px) {
+  .grid-best {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-all {
+    grid-template-columns: repeat(3, 1fr)
+  }
+
+  .gnb,
+  .footer {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .search {
+    width: 240px;
+  }
+}  
+
+@media (max-width: 768px) {
+  .grid-best { 
+    grid-template-columns: 1fr;
+  }
+
+  .grid-all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-head,
+  .tools {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search {
+    width: 100%;
+  }
+}
