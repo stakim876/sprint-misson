@@ -441,6 +441,7 @@ h2 {
   flex-shrink: 0;
 }
 
+/* 문의 작성자 자리. 사람 사진 파일이 없어 회색 원으로 둔다. */
 .comment-avatar {
   display: inline-block;
   width: 40px;

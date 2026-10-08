@@ -33,18 +33,19 @@ function ItemDetailPage() {
     event.preventDefault();
     const text = draft.trim();
     if (!text) return;
-  setCommentsById((prev) => ({
-    ...prev,
-    [item.id]: [
-      ...(prev[item.id] ?? []),
-      {
-        image: "/images/logo.png",
-        nickname: "김승태",
-        content: text,
-        updatedAt: new Date().toLocaleString("ko-KR"),
-      },
-    ],
-  }));
+    // 문의 하나는 글자가 아니라 닉네임, 내용, 작성 시간을 가진 객체다.
+    setCommentsById((prev) => ({
+      ...prev,
+      [item.id]: [
+        ...(prev[item.id] ?? []),
+        {
+          image: "/images/logo.png",
+          nickname: "김승태",
+          content: text,
+          updatedAt: new Date().toLocaleString("ko-KR"),
+        },
+      ],
+    }));
     setDraft("");
   }
   return (
@@ -75,6 +76,7 @@ function ItemDetailPage() {
               placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
               onChange={(event) => setDraft(event.target.value)}
             />
+            {/* 문의 칸에 글이 있을 때만 등록 버튼을 #3692FF로 바꾼다. */}
             <button
               type="submit"
               style={{ backgroundColor: draft.trim() ? "#3692FF" : undefined }}
@@ -93,6 +95,7 @@ function ItemDetailPage() {
             <ul>
               {comments.map((comment, index) => (
                 <li key={index}>
+                  {/* 작성자 자리는 판다 로고가 아니라 회색 동그라미다. */}
                   <span className="comment-avatar" />
                   <strong>{comment.nickname}</strong>
                   <p>{comment.content}</p>
