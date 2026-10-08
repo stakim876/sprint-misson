@@ -1,26 +1,26 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-// Link는 문서를 다시 받지 않고 주소만 /items/:id 로 바꾼다. 상세 페이지가 그 id로 상품을 찾는다.
+
+// 사진도 이 상품 응답의 images[0]을 쓴다. 다른 상품 사진을 붙이면 이름과 어긋난다.
 function productImage(item) {
-  // 서버 응답은 images[0], 로컬 상품은 image 다.
-  const src = item.images?.[0] || item.image || "/images/item-phone.jpg";
-  if (src.includes("example.com")) return "/images/item-phone.jpg";
+  const src = item.images?.[0] || item.image || "";
+  if (!src || src.includes("example.com")) return "";
   return src;
 }
 
 function ItemCard({ item }) {
+  const [failed, setFailed] = useState(false);
+  const src = productImage(item);
   // 가격은 980000 을 980,000 처럼 천 단위로 끊는다.
   const price = item.price.toLocaleString("ko-KR");
+  const showImage = src && !failed;
   return (
     <Link to={`/items/${item.id}`} className="product-card">
-      <img
-        src={productImage(item)}
-        alt=""
-        onError={(event) => {
-          // onerror를 지우지 않으면 기본 이미지도 실패할 때 같은 핸들러가 반복된다.
-          event.currentTarget.onerror = null;
-          event.currentTarget.src = "/images/item-phone.jpg";
-        }}
-      />
+      {showImage ? (
+        <img src={src} alt="" onError={() => setFailed(true)} />
+      ) : (
+        <span className="product-photo" />
+      )}
       <h3>{item.name}</h3>
       <p>{price}원</p>
       <span>♥ {item.favoriteCount}</span>
