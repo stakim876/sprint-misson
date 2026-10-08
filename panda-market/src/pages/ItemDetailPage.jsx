@@ -33,10 +33,18 @@ function ItemDetailPage() {
     event.preventDefault();
     const text = draft.trim();
     if (!text) return;
-    setCommentsById((prev) => ({
-      ...prev,
-      [item.id]: [...(prev[item.id] ?? []), text],
-    }));
+  setCommentsById((prev) => ({
+    ...prev,
+    [item.id]: [
+      ...(prev[item.id] ?? []),
+      {
+        image: "/images/logo.png",
+        nickname: "김승태",
+        content: text,
+        updatedAt: new Date().toLocaleString("ko-KR"),
+      },
+    ],
+  }));
     setDraft("");
   }
   return (
@@ -67,7 +75,12 @@ function ItemDetailPage() {
               placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
               onChange={(event) => setDraft(event.target.value)}
             />
-            <button type="submit">등록</button>
+            <button
+              type="submit"
+              style={{ backgroundColor: draft.trim() ? "#3692FF" : undefined }}
+            >
+              등록  
+            </button>  
           </form>
           {/* commentsById[상품id]가 없으면 ?? [] 이라 빈 목록으로 보고 안내 문구를 그린다. */}
           {comments.length === 0 ? (
@@ -79,7 +92,12 @@ function ItemDetailPage() {
           ) : (
             <ul>
               {comments.map((comment, index) => (
-                <li key={index}>{comment}</li>
+                <li key={index}>
+                  <span className="comment-avatar" />
+                  <strong>{comment.nickname}</strong>
+                  <p>{comment.content}</p>
+                  <time>{comment.updatedAt}</time>
+                </li>
               ))}
             </ul>
           )}

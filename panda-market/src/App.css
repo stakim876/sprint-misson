@@ -124,7 +124,9 @@ h2 {
   grid-template-columns: repeat(5, 1fr);
 }
 
-.product-card img {
+.product-card img,
+.product-card .product-photo {
+  display: block;
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
@@ -437,6 +439,16 @@ h2 {
   border-radius: 50%;
   background: #d1d5db;
   flex-shrink: 0;
+}
+
+.comment-avatar {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #d1d5db;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 .post-name {

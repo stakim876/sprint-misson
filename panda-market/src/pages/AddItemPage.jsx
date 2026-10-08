@@ -10,6 +10,8 @@ function AddItemPage() {
   const [price, setPrice] = useState("");
   const [tag, setTag] = useState("");
   const navigate = useNavigate();
+  const canSubmit =
+    name.trim() && description.trim() && price.trim() && tag.trim(); 
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -36,7 +38,7 @@ function AddItemPage() {
       <main>
         <div className="additem-head">
           <h1>상품 등록하기</h1>
-          <button type="submit" form="additemForm">
+          <button type="submit" form="additemForm" disabled={!canSubmit}>
             등록
           </button>
         </div>
