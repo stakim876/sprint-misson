@@ -16,7 +16,7 @@ const Store = (() => {
       description:
         "상태 좋은 아이폰 14 Pro 판매합니다.\n기스 거의 없고 배터리 상태도 양호해요.\n구성품은 본체와 충전기 포함입니다.",
       tags: ["전자기기", "스마트폰", "애플"],
-      image: "",
+      image: "/images/item-phone.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-12T10:00:00.000Z",
@@ -29,7 +29,7 @@ const Store = (() => {
       color: "#bbf7d0",
       description: "맥북 에어 M2 판매합니다. 사용감 적고 성능 좋아요.",
       tags: ["노트북", "애플"],
-      image: "",
+      image: "/images/item-laptop.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-11T10:00:00.000Z",
@@ -42,7 +42,7 @@ const Store = (() => {
       color: "#fecaca",
       description: "에어팟 프로 2세대, 케이스 포함입니다.",
       tags: ["이어폰", "애플"],
-      image: "",
+      image: "/images/item-earbuds.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-10T10:00:00.000Z",
@@ -55,7 +55,7 @@ const Store = (() => {
       color: "#fde68a",
       description: "사이즈 270, 실착 3회입니다.",
       tags: ["신발", "나이키"],
-      image: "",
+      image: "/images/item-sneakers.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-09T10:00:00.000Z",
@@ -68,7 +68,7 @@ const Store = (() => {
       color: "#ddd6fe",
       description: "아이패드 에어, 펜슬 미포함.",
       tags: ["태블릿", "애플"],
-      image: "",
+      image: "/images/item-tablet.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-08T10:00:00.000Z",
@@ -81,7 +81,7 @@ const Store = (() => {
       color: "#a5f3fc",
       description: "갤럭시 워치 상태 양호합니다.",
       tags: ["웨어러블", "삼성"],
-      image: "",
+      image: "/images/item-watch.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-07T10:00:00.000Z",
@@ -94,7 +94,7 @@ const Store = (() => {
       color: "#fbcfe8",
       description: "로지텍 무선 마우스입니다.",
       tags: ["주변기기"],
-      image: "",
+      image: "/images/item-mouse.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-06T10:00:00.000Z",
@@ -107,7 +107,7 @@ const Store = (() => {
       color: "#bfdbfe",
       description: "청축 기계식 키보드입니다.",
       tags: ["키보드"],
-      image: "",
+      image: "/images/item-keyboard.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-05T10:00:00.000Z",
@@ -120,7 +120,7 @@ const Store = (() => {
       color: "#d9f99d",
       description: "27인치 FHD 모니터입니다.",
       tags: ["모니터"],
-      image: "",
+      image: "/images/item-monitor.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-04T10:00:00.000Z",
@@ -133,7 +133,7 @@ const Store = (() => {
       color: "#fed7aa",
       description: "휴대용 블루투스 스피커입니다.",
       tags: ["스피커"],
-      image: "",
+      image: "/images/item-speaker.jpg",
       likedBy: [],
       comments: [],
       createdAt: "2024-04-03T10:00:00.000Z",
@@ -231,7 +231,20 @@ const Store = (() => {
   }
 
   function ensureSeed() {
-    if (!localStorage.getItem(KEYS.products)) write(KEYS.products, PRODUCT_SEED);
+    if (!localStorage.getItem(KEYS.products)) {
+      write(KEYS.products, PRODUCT_SEED);
+    } else {
+      // 예전에 빈 사진으로 저장된 상품은 같은 id의 사진 주소를 채운다.
+      const imagesById = Object.fromEntries(PRODUCT_SEED.map((item) => [item.id, item.image]));
+      const products = read(KEYS.products, []);
+      let changed = false;
+      const next = products.map((product) => {
+        if (product.image || !imagesById[product.id]) return product;
+        changed = true;
+        return { ...product, image: imagesById[product.id] };
+      });
+      if (changed) write(KEYS.products, next);
+    }
     if (!localStorage.getItem(KEYS.posts)) write(KEYS.posts, POST_SEED);
     if (!localStorage.getItem(KEYS.users)) write(KEYS.users, []);
   }
