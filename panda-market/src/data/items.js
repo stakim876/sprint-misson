@@ -1,8 +1,9 @@
 // 목록 화면은 매 렌더마다 이 함수로 현재 배열을 읽는다.
+// 이름은 미션 상품이고, image는 그 상품과 짝인 사진이다.
   let items = [
   { 
     id: "p1", 
-    name: "iPhone 14 Pro",
+    name: "아이폰 14 Pro",
     price: 980000, favoriteCount: 24,
     image: "/images/item-phone.jpg",
     description: "상태 좋은 iPhone 14 Pro 판매합니다.\n기스 거의 없고 배터리 상태도 양호해요.\n구성품은 본체와 충전기 포함입니다.",
@@ -10,7 +11,7 @@
   },
   { 
     id: "p2", 
-    name: "MacBook Air M2", 
+    name: "맥북 에어 M2", 
     price: 1250000, 
     favoriteCount: 18, 
     image: "/images/item-laptop.jpg",
@@ -19,7 +20,7 @@
    },
   { 
     id: "p3", 
-    name: "AirPods Pro 2", 
+    name: "에어팟 프로 2", 
     price: 220000, 
     favoriteCount: 31, 
     image: "/images/item-earbuds.jpg", 
@@ -37,7 +38,7 @@
    },
   { 
     id: "p5",
-    name: "iPad Air", 
+    name: "아이패드 에어", 
     price: 650000, 
     favoriteCount: 9, 
     image: "/images/item-tablet.jpg", 
@@ -46,7 +47,7 @@
   },
   { 
     id: "p6", 
-    name: "Galaxy Watch", 
+    name: "갤럭시 워치", 
     price: 180000, 
     favoriteCount: 15, 
     image: "/images/item-watch.jpg", 
@@ -55,7 +56,7 @@
   },
   { 
     id: "p7", 
-    name: "Logitech Mouse", 
+    name: "로지텍 마우스", 
     price: 45000, 
     favoriteCount: 7, 
     image: "/images/item-mouse.jpg", 
@@ -64,7 +65,7 @@
   },
   { 
     id: "p8",
-    name: "Mechanical Keyboard", 
+    name: "기계식 키보드", 
     price: 120000, 
     favoriteCount: 21, 
     image: "/images/item-keyboard.jpg", 
@@ -73,15 +74,15 @@
   },
   { 
     id: "p9", 
-    name: "27inch Monitor",
-    price: 31000,
+    name: "모니터 27인치",
+    price: 310000,
     favoriteCount: 11,
     image: "/images/item-monitor.jpg",
     description: "27인치 FHD 모니터입니다.",
     tags: ["모니터"],
   },
   { id: "p10", 
-    name: "Bluetooth Speaker", 
+    name: "블루투스 스피커", 
     price: 56000, 
     favoriteCount: 6, 
     image: "/images/item-speaker.jpg",

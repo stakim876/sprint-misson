@@ -10,6 +10,9 @@ function AddItemPage() {
   const [price, setPrice] = useState("");
   const [tag, setTag] = useState("");
   const navigate = useNavigate();
+  // 이미지는 조건에서 뺀다. 상품명, 소개, 가격, 태그가 모두 있어야 등록이 켜진다.
+  const canSubmit =
+    name.trim() && description.trim() && price.trim() && tag.trim(); 
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -36,7 +39,7 @@ function AddItemPage() {
       <main>
         <div className="additem-head">
           <h1>상품 등록하기</h1>
-          <button type="submit" form="additemForm">
+          <button type="submit" form="additemForm" disabled={!canSubmit}>
             등록
           </button>
         </div>

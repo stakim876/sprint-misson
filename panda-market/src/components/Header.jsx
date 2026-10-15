@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-// pothname으로 현재 주소를 읽어, 그 주소에 해당하는 메뉴에만 is-active를 준다.
+// pathname으로 현재 주소를 읽어, 그 주소에 해당하는 메뉴에만 is-active를 준다.
 function Header() {
   const { pathname } = useLocation();
   const onBoard = pathname.startsWith("/board");
@@ -9,7 +9,7 @@ function Header() {
     <header className="gnb">
       <a href="/" className="logo">
         <img src="/images/logo.png" alt="" />
-         <span>판다마캣</span>
+        <span>판다마켓</span>
       </a>
       <nav>
         <a href="/board" className={onBoard ? "is-active" : ""}>
